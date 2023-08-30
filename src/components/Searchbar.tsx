@@ -2,13 +2,32 @@ import { useEffect, useState } from 'react';
 import React from 'react'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { Link } from 'react-router-dom'
-import { Result } from '../types/movieDataTypes';
 
 const Searchbar = () => {
 
     const [searchResultsToggle, setSearchResultsToggle] = useState(false);
 
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState([
+        {
+            adult: undefined,
+            backdrop_path: "",
+            genre_ids: [
+                0,
+                0
+            ],
+            id: 0.0,
+            original_language: "",
+            original_title: "",
+            overview: "",
+            popularity: 0,
+            poster_path: "",
+            release_date: "",
+            title: "",
+            video: undefined,
+            vote_average: 0,
+            vote_count: 0
+        },
+    ]);
 
     const [searchParam, setSearchParam] = useState('');
 
@@ -40,10 +59,10 @@ const Searchbar = () => {
     }, [searchParam]);
 
     useEffect(() => {
-      console.log(searchResults)
-      console.log(searchParam)
+        console.log(searchResults)
+        console.log(searchParam)
     }, [searchResults, searchParam])
-    
+
     return (
         <div className={`w-full shadow-lg flex rounded-[12px] py-2  relative ${searchParam == '' ? 'opacity-80 bg-[#414141]' : 'bg-[#2c2c2c] md:bg-[#0f0f0f]'}`}>
 
@@ -61,7 +80,7 @@ const Searchbar = () => {
                     <div className='w-full absolute rounded-[12px] top-[104%] pb-2 bg-[#272727] z-[80]'>
                         <div className='min-h-[200px] max-h-[400px] overflow-y-scroll hideScrollbar'>
                             {
-                                searchResults?.map((result: Result[]) => (
+                                searchResults?.map((result) => (
                                     <Link key={result?.id} to={`/movies/${result?.id}`} className='p-3 border-b flex gap-4 items-center border-[#8d8d8d] hover:bg-gray-500 cursor-pointer hover:text-gray-800' onClick={goToMovie}>
                                         <span className='w-[100px]'>
                                             <img src={`https://image.tmdb.org/t/p/original${result?.backdrop_path}`} className='w-full rounded-[3px]' alt="Thumbnail" />
