@@ -1,4 +1,3 @@
-import React from 'react'
 import profilePic from '../assets/profile.jpg'
 import axisBank from '../assets/axis-bank.svg'
 import masterCard from '../assets/mastercard.svg'
